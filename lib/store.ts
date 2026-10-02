@@ -14,6 +14,8 @@ import type { Conflict, Pipeline, Scenario, Side, Strategy, SyncRecord } from ".
 
 const KEY = "abgleich:v1";
 const MAX_RECORDS = 400;
+/** Älterer gespeicherter Stand wird verworfen, sonst sieht ein wiederkehrender Besucher „letzter Lauf vor 3 Tagen“. */
+const MAX_AGE = 6 * 3_600_000;
 
 export type Tone = "ok" | "bad" | "warn" | "info";
 export interface Toast {
@@ -158,14 +160,17 @@ export const useStore = create<State>()((set, get) => {
 
     init: () => {
       if (get().ready) return;
-      let data: Data | null = null;
+      let data: (Data & { savedAt?: number }) | null = null;
       try {
         const raw = localStorage.getItem(KEY);
-        if (raw) data = JSON.parse(raw) as Data;
+        if (raw) data = JSON.parse(raw) as Data & { savedAt?: number };
       } catch {
         data = null;
       }
-      if (!data?.pipelines?.length) data = seed(Date.now());
+      const fresh = !!data?.savedAt && Date.now() - data.savedAt < MAX_AGE;
+      if (!fresh || !data?.pipelines?.length) data = seed(Date.now());
+      const { pipelines, records, conflicts } = data;
+      data = { pipelines, records, conflicts };
       // Ein beim Neuladen unterbrochener Lauf gilt als abgebrochen; seine Datensätze arbeitet drain() ab.
       data.pipelines = data.pipelines.map((p) => ({ ...p, run: null }));
       set({ ...data, ready: true });
@@ -266,7 +271,7 @@ if (typeof window !== "undefined") {
     pending = setTimeout(() => {
       const { pipelines, records, conflicts } = useStore.getState();
       try {
-        localStorage.setItem(KEY, JSON.stringify({ pipelines, records, conflicts }));
+        localStorage.setItem(KEY, JSON.stringify({ pipelines, records, conflicts, savedAt: Date.now() }));
       } catch {
         // Speicher voll oder gesperrt (privates Fenster): die Demo läuft trotzdem, nur ohne Gedächtnis.
       }

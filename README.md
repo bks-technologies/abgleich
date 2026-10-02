@@ -3,6 +3,12 @@
 Vorführstück von BKS Technologies. Zeigt, wie ein Betrieb den Datenabgleich zwischen Shop, ERP, CRM und
 Buchhaltung im Blick behält und Konflikte entscheidet. **Alle Firmen, Personen und Zahlen sind erfunden.**
 
+![Übersicht](docs/screenshots/uebersicht.png)
+
+| Konflikt lösen | Dunkel |
+|:---:|:---:|
+| ![Konfliktlöser](docs/screenshots/konflikt.png) | ![Dunkelmodus](docs/screenshots/dunkel.png) |
+
 ## Was drin ist
 
 - **Pipelines**: vier Verbindungen (Shopify → SAP, HubSpot ⇄ Salesforce, Stripe → DATEV, SAP → Shopify, pausiert)
@@ -36,12 +42,9 @@ npm run lint
 npm run build
 ```
 
-## Veröffentlichen (nur auf Samis Freigabe)
+## Veröffentlichen
 
-1. Repo `bks-technologies/abgleich` anlegen und pushen.
-2. Vercel: Projekt aus dem Repo, Region Frankfurt (`vercel.json`), keine Umgebungsvariablen nötig.
-3. Domain `abgleich.bkstechnologies.de` im Projekt hinzufügen, bei IONOS CNAME `abgleich` auf den Wert von Vercel
-   (MX nicht anfassen).
-4. Erst danach den Abschnitt im GitHub-Profil (`github-portfolio`) ergänzen, sonst zeigt der Link ins Leere.
+Schritt für Schritt in [`VEROEFFENTLICHEN.md`](VEROEFFENTLICHEN.md): GitHub, Vercel (Frankfurt), Subdomain
+`abgleich.bkstechnologies.de` bei IONOS, Abschnitt fürs GitHub-Profil (`docs/portfolio-abschnitt.md`).
 
 Datenschutz ist ein gekennzeichneter Entwurf. Impressum-Fakten stammen aus `website/lib/site.ts`.

@@ -39,12 +39,13 @@ export function Feed() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
+    // Nach Zeitpunkt sortieren: abgearbeitete und erneut gesendete Datensätze bekommen einen neuen Zeitstempel.
     return records.filter(
       (r) =>
         (status === "all" || r.status === status) &&
         (entity === "all" || r.entity === entity) &&
         (!q || r.ref.toLowerCase().includes(q) || r.label.toLowerCase().includes(q) || (r.message ?? "").toLowerCase().includes(q)),
-    );
+    ).sort((a, b) => b.at - a.at);
   }, [records, status, entity, query]);
 
   const visible = filtered.slice(0, limit);
@@ -89,12 +90,11 @@ export function Feed() {
         </div>
       </div>
 
-      <div role="tablist" aria-label="Nach Status filtern" className="flex gap-1 overflow-x-auto border-b border-line px-3 py-2">
+      <div role="group" aria-label="Nach Status filtern" className="flex gap-1 overflow-x-auto border-b border-line px-3 py-2">
         {(["all", "synced", "failed", "pending", "conflict"] as const).map((s) => (
           <button
             key={s}
-            role="tab"
-            aria-selected={status === s}
+            aria-pressed={status === s}
             onClick={() => {
               setStatus(s);
               setLimit(PAGE);

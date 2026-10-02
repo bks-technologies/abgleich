@@ -2,10 +2,12 @@
 
 import { forwardRef, useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
+import { twMerge } from "tailwind-merge";
 import { STATUS, SYSTEMS } from "@/lib/systems";
 import type { Status, SystemId } from "@/lib/types";
 
-export const cx = (...c: (string | false | null | undefined)[]) => c.filter(Boolean).join(" ");
+/** Klassen zusammenfügen; bei Widerspruch (z. B. „inline-flex“ und „hidden“) gewinnt die spätere Angabe. */
+export const cx = (...c: (string | false | null | undefined)[]) => twMerge(c.filter(Boolean).join(" "));
 
 export type Tone = "ok" | "bad" | "pend" | "warn" | "accent" | "muted";
 
@@ -71,6 +73,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         variant === "secondary" && "bg-surface text-ink shadow-card ring-1 ring-line-strong hover:bg-sunken",
         variant === "ghost" && "text-muted hover:bg-sunken hover:text-ink",
         variant === "danger" && "bg-surface text-bad ring-1 ring-line-strong hover:bg-bad-soft",
+        // Ein laufender Knopf ist beschäftigt, nicht abgeschaltet: volle Farbe behalten.
+        loading && "disabled:cursor-progress disabled:opacity-100",
         className,
       )}
       {...rest}

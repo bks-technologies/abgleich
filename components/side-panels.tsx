@@ -133,7 +133,7 @@ export function Simulator() {
               <label
                 key={x.id}
                 className={cx(
-                  "flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 ring-1 transition-colors",
+                  "flex cursor-pointer items-center gap-2.5 rounded-lg px-2.5 py-2 ring-1 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-accent",
                   x.id === p?.id ? "bg-accent-soft/50 ring-accent/50" : "ring-transparent hover:bg-sunken",
                 )}
               >
@@ -173,7 +173,7 @@ export function Simulator() {
           <div>
             <Button
               variant="primary"
-              className="relative h-10 w-full overflow-hidden"
+              className={cx("relative h-10 w-full overflow-hidden", p.run && "disabled:cursor-progress disabled:opacity-100")}
               onClick={() => trigger(p.id, scenario)}
               disabled={p.paused || !!p.run}
               aria-busy={!!p.run || undefined}
