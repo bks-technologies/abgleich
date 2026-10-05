@@ -5,10 +5,10 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-// Adresse für Vorschaubilder: eigene Domain, sonst die Produktionsadresse von Vercel, lokal localhost.
+// Adresse für Vorschaubilder: auf Vercel immer die eigene Domain, lokal localhost.
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+  (process.env.VERCEL ? "https://abgleich.bkstechnologies.de" : "http://localhost:3000");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
