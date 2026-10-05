@@ -19,7 +19,7 @@ export default function Datenschutz() {
       <p>Abgleich ist ein Vorführstück von BKS Technologies. Es enthält ausschließlich erfundene Firmen, Personen und Daten. Es gibt keine Anmeldung, keine Konten und keine Verbindung zu den genannten Systemen; alle Abgleiche werden im Browser simuliert.</p>
 
       <h2>3. Hosting</h2>
-      <p>Die Anwendung läuft bei Vercel Inc. in der Region Frankfurt am Main. Beim Aufruf verarbeitet der Anbieter technisch notwendige Verbindungsdaten (IP-Adresse, Zeitpunkt, aufgerufene Adresse) zur Auslieferung und Absicherung der Seite (Art. 6 Abs. 1 lit. f DSGVO). Mit dem Anbieter besteht ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO.</p>
+      <p>Die Anwendung läuft bei Vercel Inc. in der Region Frankfurt am Main. Beim Aufruf verarbeitet der Anbieter technisch notwendige Verbindungsdaten (IP-Adresse, Zeitpunkt, aufgerufene Adresse) zur Auslieferung und Absicherung der Seite (Art. 6 Abs. 1 lit. f DSGVO). Vercel Inc. hat seinen Sitz in den USA; dabei können Verbindungsdaten auch in die USA übertragen werden.</p>
 
       <h2>4. Speicherung im Browser, keine Cookies</h2>
       <p>Damit Ihre Klicks in der Demo erhalten bleiben (angestoßene Läufe, gelöste Konflikte), speichert die Anwendung den Stand im lokalen Speicher Ihres Browsers (localStorage). Diese Daten werden nicht übertragen und lassen sich jederzeit über „Zurücksetzen“ oder durch Löschen der Websitedaten im Browser entfernen (§ 25 Abs. 2 Nr. 2 TDDDG). Die Anwendung setzt keine Cookies, nutzt keine Analyse- oder Werbedienste und lädt keine Inhalte von fremden Servern.</p>
